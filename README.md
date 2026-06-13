@@ -41,15 +41,25 @@ Project Summary
 <p>
  ...
 </p>
-<h2>
- 1.3 Results
-</h2>
+
+<h2>1.3 Results</h2>
 <p>
 The final auxiliary power supply is shown below:
  <br>
  <img width="650" height="300" alt="image" src="https://github.com/user-attachments/assets/513cd3ee-0242-4124-b034-4cad9fcdd1ad" />
 
 The PCBs were ordered from JLC PCB and all components were soldered by hand or with a hot plate/hot air gun.
+</p>
+
+<h3>1.4 Mistakes, Improvements, Reflections</h3>
+<p>
+ One confusing thing that may pop out is the fact that the 2-phase converter and the bucking converters / LDOs are separated into two boards, and that the circuit protections are after the first converter. This was because of the way that work was originally delegated. The team had first thought that the auxiliary electronics would be powered by a secondary battery, so the board containing the power electronics to create 12V, 5V, and 3.3V lines was supposed to come from a 12V battery (full charge would be at 12.4V which is why a LDO to 12V is used). Because of this, the 2-phase inverter and the other power electronics were initially separated until the system design changed to supply the auxiliary electronics straight from the 36V batteries. Since the designs were at different phases, the 12/5/3.3 board was made first and then the 36 to 13.5V board was made after. This entire system could in the future be integrated onto one board and made more compact.
+
+The overall PCB layout for the 12/5/3.3 board could also be improved, making it more compact and wasting less space. We could also use different chips more conducive to reducing current loops (the chip used had the SW pin right between the input and gnd pins!). Alternative options for circuit protections could be used such as ICs for protection rather than the components used. All components on this board were 1206 since I was inexperienced in soldering, although I eventually became proficient enough to solder 0402s and larger in the carrier board (and even a VQFN-40 -_- ).
+
+One oversight was the inrush current protection that was used. Firstly, it was incorrectly sized with too high of a resistance. The resistance was high enough to cause a voltage drop when 1+ amps were running, killing the low dropout threshold required for the 12V LDO and not heating up enough to reduce the resistance. It was a poor choice that was not thoroughly checked.
+
+For the two-phase converter, I would probably use a ferrite bead for the EMI filter next time, as ringing could be a problem and the fact that the solar splash competition requires system voltages below 50V could be problematic if the team decided to switch to a 48V battery pack configuration.
 </p>
 
 <h1 align="left">
