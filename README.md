@@ -69,9 +69,9 @@ For the two-phase converter, I would probably use a ferrite bead for the EMI fil
  The Why and What
 </h2>
 <p>
-The solar boat system this year included a steer-by-wire and throttle-by-wire system. The steering was mechanically decoupled from the rudders, allowing for electronic control of the steering to occur by sensing the steering wheel angle, and sending the appropriate control signals to the stepper motors which would turn the rudders. The throttle signal was also read electronically and outputted appropriate control signals to the motor controllers to control speed. This electronic system allows for extra steering by adding differential thrust on top of the rudder angle. If the steering wheel is turned, sharper turns can be achieved by running one motor faster than the other.
+The solar boat system this year included a steer-by-wire and throttle-by-wire system. The steering was mechanically decoupled from the rudders, allowing for electronic control of the steering to occur by sensing the steering wheel angle, and sending the appropriate control signals to the stepper motors which would turn the rudders. The throttle signal was also read electronically and outputted appropriate control signals to the motor controllers to control speed. This electronic thorttle system allows for extra steering by adding differential thrust on top of the rudder angle. If the steering wheel is turned, sharper turns can be achieved by running one motor faster than the other.
 
-To implement the above functionalities, an STM32G474RE microcontroller was used, specifically on the NUCLEO 64 development platform. The STM32 microcontroller was in charge of executing the core functionalities of the boat: driving and steering. The steering used a closed feedback control loop, meaning it had to read sensor information important for controlling the angle such as the steering wheel angle and the actual angle of the rudder to calculate error. It also had to read the throttle signal.
+To implement the above functionalities, an STM32G474RE microcontroller was used, specifically on the NUCLEO 64 development platform. The STM32 microcontroller was in charge of executing the core functionalities of the boat: driving and steering. The steering used a closed feedback control loop, meaning it had to read sensor information important for controlling the angle such as the steering wheel angle and the actual angle of the rudder to calculate error. It also had to read the throttle signal for both the speed control and the differential thrust control.
 
 Another system implemented this year was the remote telemetry data acquisition system. This would be done by a Raspberry PI. Separate from the STM32, this computing platform reads non operational critical data into a buffer for the remote server to read and display. The goal was to give both the driver and ground station information about various diagnostics such as battery temperatures, speed readings, charge, and various other information. For operation critical data that gets read first by the STM32, a communication channel should be set up between the STM32 and PI for the PI to read from the STM32.
 
@@ -80,7 +80,7 @@ All the above dictate the need for external electronic components not included i
 -Differential Receivers to read stepper motor feedback signals
 -Resistor Dividers and Op-Amps for analog inputs and outputs that do not match voltages with the STM32
 -CAN Transceiver to communicate sensor data to the Raspberry PI
--Various I/O ports and connectors that are more stable and immune to vibrations than the jumper pin connections of the development board
+-Various I/O ports and connectors that are more stable, professional, and immune to vibrations than the jumper wire connections off the development board
 
 These components are implemented on a carrier PCB that interfaces the development board with the above components.
 
